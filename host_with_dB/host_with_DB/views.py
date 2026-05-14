@@ -1,8 +1,16 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404, redirect
+from .models import Post
 
 # Create your views here.
 def index(request):
-    return render(request, 'host_with_DB/index.html')
+    posts = Post.objects.all()
+    return render(request, 'host_with_DB/index.html',{'posts': posts})
 
-def idelete(request):
-    return render(request, 'host_with_DB/delete_post.html')
+def post_read(request,post_id):
+    post = get_object_or_404(Post, id=post_id)
+    return render(request, 'host_with_DB/post_read.html', {'post': post})
+
+def post_delete(request,post_id):
+    post = get_object_or_404(Post, id=post_id)
+    post.delete()
+    return redirect('index')

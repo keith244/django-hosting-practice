@@ -1,14 +1,30 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Index Page</title>
+
+    <link rel="stylesheet" href="{% static 'hosting_with_DB/css/style.css' %}">
 </head>
 <body>
 
-    <h1>Welcome to the Index Page</h1>
-    <p>Display all posts here.</p>
+    <div class="container">
+        <h1>Welcome to the Index Page</h1>
+        <p>Display all posts here.</p>
+
+        <div class="posts">
+            {% for post in posts %}
+                <h3>{{ post.title }}</h3>
+                <p>{{post.content}}</p>
+
+                <a href="{% url 'post_read' post.id %}" class="read-btn">
+                    Read Post
+                </a>
+            {% endfor %}
+        </div>
+    </div>
     
 </body>
 </html>
