@@ -1,6 +1,6 @@
 from django.shortcuts import render,get_object_or_404, redirect
 from django.http import HttpResponse
-from django.core import cache
+from django.core.cache import cache
 from .models import Post
 
 # Create your views here.
@@ -17,12 +17,15 @@ def create_post(request):
     #check if user posted recently
     if cache.get(cache_key):
         return HttpResponse("Too many requests. Please wiat before creating another post.", status=429)
+
     if request.method == 'POST':
         title = request.POST.get('title')
         content = request.POST.get('content')
         Post.objects.create(title=title, content=content)
+
         # set rate limit for 1 minute
         cache.set(cache_key, True, timeout=60)
+
         return redirect('index')
     return render(request, 'host_with_DB/create_post.html') 
 

@@ -13,6 +13,7 @@
     <div class="container">
         <h1>Welcome to the Index Page</h1>
         <p>Display all posts here.</p>
+        <a href="{% url 'create_post' %}" class="read-btn">Create post</a>
 
         <div class="posts">
             {% for post in posts %}
@@ -22,8 +23,10 @@
                 <a href="{% url 'post_read' post.id %}" class="read-btn">
                     Read Post
                 </a>
+                <small>Created: {{post.created_at}}</small>
             {% endfor %}
         </div>
+
     </div>
     
 </body>
