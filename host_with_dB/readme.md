@@ -115,3 +115,8 @@ Through this project, I learned:
 - How to connect Django to a PostgreSQL database
 - How to deploy a Django application using Render
 - Basic production setup using Gunicorn and WhiteNoise
+
+# Project URL:
+You can access the live project here:
+
+https://host-with-db.onrender.com/
